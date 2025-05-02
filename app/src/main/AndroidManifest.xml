@@ -7,31 +7,84 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="feriaAPP"
+        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FeriaAPP"
         tools:targetApi="31">
 
-        <!-- Actividad principal -->
+        <!-- Actividad principal - Punto de entrada -->
         <activity
-            android:name="MainActivity"
+            android:name=".MainActivity"
             android:exported="true"
-            android:label="FeriaAPP"
+            android:label="@string/app_name"
             android:theme="@style/Theme.FeriaAPP"
-            tools:ignore="MissingClass">
+            android:windowSoftInputMode="adjustResize"
+            tools:ignore="RedundantLabel">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <!-- Actividad secundaria (Activity2) -->
+        <!-- Actividad de fechas importantes (actualizada de Activity2 a ImportantDatesActivity) -->
         <activity
-            android:name=".Activity2"
-            android:exported="true"
-            android:label="Activity2"
-            android:theme="@style/Theme.FeriaAPP" />
+            android:name=".ImportantDatesActivity"
+            android:exported="false"
+            android:label="@string/fechas_importantes"
+            android:theme="@style/Theme.FeriaAPP"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <!-- Actividades para las naves -->
+        <activity
+            android:name=".Nave1Activity"
+            android:exported="false"
+            android:label="@string/nave_1_titulo"
+            android:theme="@style/Theme.FeriaAPP"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".Nave2Activity"
+            android:exported="false"
+            android:label="@string/nave_2_titulo"
+            android:theme="@style/Theme.FeriaAPP"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".Nave3Activity"
+            android:exported="false"
+            android:label="@string/nave_3_titulo"
+            android:theme="@style/Theme.FeriaAPP"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <!-- Actividad para artistas (corregido el nombre de ArtistasActivity a ArtistsActivity) -->
+        <activity
+            android:name=".ArtistsActivity"
+            android:exported="false"
+            android:label="@string/artistas_titulo"
+            android:theme="@style/Theme.FeriaAPP"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
     </application>
 
 </manifest>

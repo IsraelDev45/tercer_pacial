@@ -22,17 +22,35 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MainScreen(onNavigateToSecondActivity = {
-                // Iniciamos la segunda actividad cuando se presione el botón
-                startActivity(Intent(this, Activity2::class.java))
-            })
+            MainScreen(
+                onNavigateToSecondActivity = {
+                    startActivity(Intent(this, ImportantDatesActivity::class.java))
+                },
+                onNavigateToNave1 = {
+                    startActivity(Intent(this, Nave1Activity::class.java))
+                },
+                onNavigateToNave2 = {
+                    startActivity(Intent(this, Nave2Activity::class.java))
+                },
+                onNavigateToNave3 = {
+                    startActivity(Intent(this, Nave3Activity::class.java))
+                },
+                onNavigateToArtists = {
+                    startActivity(Intent(this, ArtistsActivity::class.java))
+                }
+            )
         }
     }
 }
 
 @Composable
-fun MainScreen(onNavigateToSecondActivity: () -> Unit) {
-    // Pantalla principal que contiene todos los elementos
+fun MainScreen(
+    onNavigateToSecondActivity: () -> Unit,
+    onNavigateToNave1: () -> Unit,
+    onNavigateToNave2: () -> Unit,
+    onNavigateToNave3: () -> Unit,
+    onNavigateToArtists: () -> Unit
+) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
@@ -44,13 +62,38 @@ fun MainScreen(onNavigateToSecondActivity: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-
-
             // Lista de negocios con sus imágenes
-            BusinessItem("Negocios de la Nave 1", Color(0xFF6650a4)) // Purple40
-            BusinessItem("Negocios de la Nave 2", Color(0xFF6650a4)) // Purple40
-            BusinessItem("Negocios de la Nave 3", Color(0xFF6650a4)) // Purple40
-            BusinessItem("Atracciones y Conciertos", Color(0xFFD0BCFF)) // Purple80
+            BusinessItem(
+                title = "Nave 1: Gastronomía Local",
+                description = "Explora los sabores tradicionales de nuestra región",
+                imageRes = R.drawable.nave_1,
+                cardColor = Color(0xFF6650a4),
+                onClick = onNavigateToNave1
+            )
+
+            BusinessItem(
+                title = "Nave 2: Artesanías",
+                description = "Productos artesanales y manualidades",
+                imageRes = R.drawable.nave_2,
+                cardColor = Color(0xFF6650a4),
+                onClick = onNavigateToNave2
+            )
+
+            BusinessItem(
+                title = "Nave 3: Tecnología e Innovación",
+                description = "Lo último en tecnología y emprendimiento",
+                imageRes = R.drawable.nave_3,
+                cardColor = Color(0xFF6650a4),
+                onClick = onNavigateToNave3
+            )
+
+            BusinessItem(
+                title = "Artistas Invitados",
+                description = "Conoce a los artistas que nos visitan este año",
+                imageRes = R.drawable.artistas,
+                cardColor = Color(0xFFD0BCFF),
+                onClick = onNavigateToArtists
+            )
 
             // Botón para navegar a la segunda actividad
             Button(
@@ -59,7 +102,7 @@ fun MainScreen(onNavigateToSecondActivity: () -> Unit) {
             ) {
                 Text(
                     text = "Fechas importantes",
-                    fontFamily = FontFamily.SansSerif // Cambio de tipo de letra
+                    fontFamily = FontFamily.SansSerif
                 )
             }
         }
@@ -67,50 +110,65 @@ fun MainScreen(onNavigateToSecondActivity: () -> Unit) {
 }
 
 @Composable
-fun BusinessItem(text: String, cardColor: Color) {
-    // Componente reutilizable para mostrar negocio con imagen
+fun BusinessItem(
+    title: String,
+    description: String,
+    imageRes: Int,
+    cardColor: Color,
+    onClick: () -> Unit
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(120.dp),
+            .height(150.dp),
         colors = CardDefaults.cardColors(
-            containerColor = cardColor // Color de fondo de la card
-        )
+            containerColor = cardColor
+        ),
+        onClick = onClick
     ) {
         Row(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(8.dp),
+                .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Imagen del restaurante
             Image(
-                painter = painterResource(id = R.drawable.logo_rest), // Asegúrate de que logo_rest.xml.xml sea un VectorDrawable o PNG/JPG/WEBP
-                contentDescription = "Logo restaurante",
+                painter = painterResource(id = imageRes),
+                contentDescription = "Imagen de $title",
                 modifier = Modifier
-                    .size(100.dp)
-                    .padding(8.dp)
+                    .size(120.dp)
+                    .padding(end = 16.dp)
             )
-            // Texto del negocio
-            Text(
-                text = text,
-                modifier = Modifier.padding(8.dp),
-                fontFamily = FontFamily.SansSerif // Cambio de tipo de letra
-            )
+
+            Column {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleMedium,
+                    color = Color.White,
+                    fontFamily = FontFamily.SansSerif
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text(
+                    text = description,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = Color.White.copy(alpha = 0.8f),
+                    fontFamily = FontFamily.SansSerif
+                )
+            }
         }
     }
 }
 
-// Vista previa del MainScreen
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewMainScreen() {
-    MainScreen(onNavigateToSecondActivity = {})
-}
-
-// Vista previa de BusinessItem
-@Preview(showBackground = true)
-@Composable
-fun PreviewBusinessItem() {
-    BusinessItem(text = "Negocios de la Nave 1", cardColor = Color(0xFF6650a4))
+    MainScreen(
+        onNavigateToSecondActivity = {},
+        onNavigateToNave1 = {},
+        onNavigateToNave2 = {},
+        onNavigateToNave3 = {},
+        onNavigateToArtists = {}
+    )
 }

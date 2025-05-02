@@ -1,4 +1,4 @@
-package com.maestrocorona.appferia
+package com.example.feriaapp
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,10 +10,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
-class Activity2 : ComponentActivity() {
+class ImportantDatesActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -24,7 +23,6 @@ class Activity2 : ComponentActivity() {
 
 @Composable
 fun SecondScreen(onBackPressed: () -> Unit) {
-    // Pantalla secundaria con lista de restaurantes
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
@@ -36,19 +34,18 @@ fun SecondScreen(onBackPressed: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Lista de restaurantes
-            RestaurantItem("Restaurante 1")
-            RestaurantItem("Restaurante 2")
-            RestaurantItem("Restaurante 3")
+            DateItem("15 de Octubre", "Inauguración de la feria")
+            DateItem("20 de Octubre", "Concierto principal")
+            DateItem("25 de Octubre", "Feria gastronómica")
+            DateItem("30 de Octubre", "Clausura y fuegos artificiales")
 
-            // Botón para volver
             Button(
                 onClick = onBackPressed,
                 modifier = Modifier.padding(top = 16.dp)
             ) {
                 Text(
                     text = "Volver",
-                    fontFamily = FontFamily.SansSerif // Cambio de tipo de letra
+                    fontFamily = FontFamily.SansSerif
                 )
             }
         }
@@ -56,41 +53,32 @@ fun SecondScreen(onBackPressed: () -> Unit) {
 }
 
 @Composable
-fun RestaurantItem(name: String) {
-    // Componente reutilizable para mostrar un restaurante
+fun DateItem(date: String, event: String) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .height(80.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFF6650a4) // Purple40
+            containerColor = Color(0xFF6650a4)
         )
     ) {
-        Box(
+        Row(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(8.dp),
-            contentAlignment = Alignment.CenterStart
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = name,
-                fontFamily = FontFamily.SansSerif, // Cambio de tipo de letra
-                color = Color.White // Texto en blanco para mejor contraste
+                text = date,
+                fontFamily = FontFamily.SansSerif,
+                color = Color.White
+            )
+            Text(
+                text = event,
+                fontFamily = FontFamily.SansSerif,
+                color = Color.White
             )
         }
     }
-}
-
-// Vista previa de SecondScreen
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun PreviewSecondScreen() {
-    SecondScreen(onBackPressed = {})
-}
-
-// Vista previa de RestaurantItem
-@Preview(showBackground = true)
-@Composable
-fun PreviewRestaurantItem() {
-    RestaurantItem(name = "Restaurante 1")
 }
