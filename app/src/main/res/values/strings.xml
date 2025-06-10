@@ -5,4 +5,5 @@
     <string name="nave_2_titulo">Nave 2 - Detalles</string>
     <string name="nave_3_titulo">Nave 3 - Detalles</string>
     <string name="artistas_titulo">Artistas Invitados</string>
+    <string name="title_activity_cat">Pantalla de Gatitos</string>
 </resources>

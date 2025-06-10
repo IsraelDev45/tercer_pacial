@@ -1,5 +1,6 @@
 package com.example.feriaapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,18 +11,19 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import android.content.Intent
-import androidx.compose.ui.graphics.Color
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            // Asegúrate de que tu tema de Compose esté aquí si lo tienes definido
+            // FeriaAPPTheme {
             MainScreen(
                 onNavigateToSecondActivity = {
                     startActivity(Intent(this, ImportantDatesActivity::class.java))
@@ -37,8 +39,12 @@ class MainActivity : ComponentActivity() {
                 },
                 onNavigateToArtists = {
                     startActivity(Intent(this, ArtistsActivity::class.java))
+                }, // <--- ESTA COMA FALTABA AQUÍ ANTES DE onNavigateToCatScreen
+                onNavigateToCatScreen = {
+                    startActivity(Intent(this, CatActivity::class.java))
                 }
             )
+            // }
         }
     }
 }
@@ -49,7 +55,8 @@ fun MainScreen(
     onNavigateToNave1: () -> Unit,
     onNavigateToNave2: () -> Unit,
     onNavigateToNave3: () -> Unit,
-    onNavigateToArtists: () -> Unit
+    onNavigateToArtists: () -> Unit,
+    onNavigateToCatScreen: () -> Unit // Parámetro añadido correctamente
 ) {
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -60,13 +67,12 @@ fun MainScreen(
                 .fillMaxSize()
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(16.dp) // Espacio entre todos los ítems
         ) {
-            // Lista de negocios con sus imágenes
             BusinessItem(
                 title = "Nave 1: Gastronomía Local",
                 description = "Explora los sabores tradicionales de nuestra región",
-                imageRes = R.drawable.nave_1,
+                imageRes = R.drawable.nave_1, // Asegúrate que este drawable exista
                 cardColor = Color(0xFF6650a4),
                 onClick = onNavigateToNave1
             )
@@ -74,7 +80,7 @@ fun MainScreen(
             BusinessItem(
                 title = "Nave 2: Artesanías",
                 description = "Productos artesanales y manualidades",
-                imageRes = R.drawable.nave_2,
+                imageRes = R.drawable.nave_2, // Asegúrate que este drawable exista
                 cardColor = Color(0xFF6650a4),
                 onClick = onNavigateToNave2
             )
@@ -82,7 +88,7 @@ fun MainScreen(
             BusinessItem(
                 title = "Nave 3: Tecnología e Innovación",
                 description = "Lo último en tecnología y emprendimiento",
-                imageRes = R.drawable.nave_3,
+                imageRes = R.drawable.nave_3, // Asegúrate que este drawable exista
                 cardColor = Color(0xFF6650a4),
                 onClick = onNavigateToNave3
             )
@@ -90,15 +96,38 @@ fun MainScreen(
             BusinessItem(
                 title = "Artistas Invitados",
                 description = "Conoce a los artistas que nos visitan este año",
-                imageRes = R.drawable.artistas,
+                imageRes = R.drawable.artistas, // Asegúrate que este drawable exista
                 cardColor = Color(0xFFD0BCFF),
                 onClick = onNavigateToArtists
             )
 
-            // Botón para navegar a la segunda actividad
+            // Opción 1: Usar BusinessItem para "Ver Gatitos" (consistente con tu diseño)
+            BusinessItem(
+                title = "¡Mira Gatitos!",
+                description = "Una dosis diaria de ternura felina",
+                imageRes = R.drawable.ic_cat_placeholder, // ¡¡NECESITAS AÑADIR ESTE DRAWABLE!!
+                cardColor = Color(0xFFE91E63), // Ejemplo de color, puedes cambiarlo
+                onClick = onNavigateToCatScreen
+            )
+
+            // Opción 2: Usar un Button simple para "Ver Gatitos" (como lo tenías antes)
+            // Si prefieres esta opción, comenta el BusinessItem de arriba y descomenta este Button.
+            /*
+            Button(
+                onClick = onNavigateToCatScreen,
+                modifier = Modifier.fillMaxWidth() // Para que ocupe el ancho como los BusinessItem
+                                     // .padding(top = 0.dp) // Ajusta el padding si es necesario
+            ) {
+                Text(
+                    text = "Ver Gatitos",
+                    fontFamily = FontFamily.SansSerif
+                )
+            }
+            */
+
             Button(
                 onClick = onNavigateToSecondActivity,
-                modifier = Modifier.padding(top = 16.dp)
+                modifier = Modifier.fillMaxWidth() // Para que ocupe el ancho
             ) {
                 Text(
                     text = "Fechas importantes",
@@ -113,7 +142,7 @@ fun MainScreen(
 fun BusinessItem(
     title: String,
     description: String,
-    imageRes: Int,
+    imageRes: Int, // Asegúrate de que los drawables referenciados aquí existan
     cardColor: Color,
     onClick: () -> Unit
 ) {
@@ -139,7 +168,6 @@ fun BusinessItem(
                     .size(120.dp)
                     .padding(end = 16.dp)
             )
-
             Column {
                 Text(
                     text = title,
@@ -147,9 +175,7 @@ fun BusinessItem(
                     color = Color.White,
                     fontFamily = FontFamily.SansSerif
                 )
-
                 Spacer(modifier = Modifier.height(8.dp))
-
                 Text(
                     text = description,
                     style = MaterialTheme.typography.bodyMedium,
@@ -164,11 +190,15 @@ fun BusinessItem(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewMainScreen() {
+    // Asegúrate de que tu tema de Compose esté aquí si lo tienes definido
+    // FeriaAPPTheme {
     MainScreen(
         onNavigateToSecondActivity = {},
         onNavigateToNave1 = {},
         onNavigateToNave2 = {},
         onNavigateToNave3 = {},
-        onNavigateToArtists = {}
+        onNavigateToArtists = {},
+        onNavigateToCatScreen = {} // Parámetro añadido correctamente para el Preview
     )
+    // }
 }
