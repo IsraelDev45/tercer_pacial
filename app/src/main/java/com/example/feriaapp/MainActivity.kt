@@ -70,43 +70,43 @@ fun MainScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp) // Espacio entre todos los ítems
         ) {
             BusinessItem(
-                title = "Nave 1: Gastronomía Local",
-                description = "Explora los sabores tradicionales de nuestra región",
+                title = "Nave 1",
+                description = "Explora los Juegos de nuestra región",
                 imageRes = R.drawable.nave_1, // Asegúrate que este drawable exista
-                cardColor = Color(0xFF6650a4),
+                cardColor = Color(0xFFE5904C),
                 onClick = onNavigateToNave1
             )
 
             BusinessItem(
-                title = "Nave 2: Artesanías",
-                description = "Productos artesanales y manualidades",
+                title = "Nave 2: Artesanías y relajación",
+                description = "Productos artesanales y Lugares para relajarse",
                 imageRes = R.drawable.nave_2, // Asegúrate que este drawable exista
-                cardColor = Color(0xFF6650a4),
+                cardColor = Color(0xFFE5904C),
                 onClick = onNavigateToNave2
             )
 
             BusinessItem(
-                title = "Nave 3: Tecnología e Innovación",
-                description = "Lo último en tecnología y emprendimiento",
+                title = "Nave 3: Playa",
+                description = "Admira las playas de nuestra Nave 3",
                 imageRes = R.drawable.nave_3, // Asegúrate que este drawable exista
-                cardColor = Color(0xFF6650a4),
+                cardColor = Color(0xFFE5904C),
                 onClick = onNavigateToNave3
             )
 
             BusinessItem(
-                title = "Artistas Invitados",
-                description = "Conoce a los artistas que nos visitan este año",
+                title = "Artistas",
+                description = "Conoce a los artistas",
                 imageRes = R.drawable.artistas, // Asegúrate que este drawable exista
-                cardColor = Color(0xFFD0BCFF),
+                cardColor = Color(0xFFE5904C),
                 onClick = onNavigateToArtists
             )
 
             // Opción 1: Usar BusinessItem para "Ver Gatitos" (consistente con tu diseño)
             BusinessItem(
-                title = "¡Mira Gatitos!",
-                description = "Una dosis diaria de ternura felina",
+                title = "¡Gatitos!",
+                description = "Unos cuantos gatitos bonitos",
                 imageRes = R.drawable.ic_cat_placeholder, // ¡¡NECESITAS AÑADIR ESTE DRAWABLE!!
-                cardColor = Color(0xFFE91E63), // Ejemplo de color, puedes cambiarlo
+                cardColor = Color(0xFFE5904C), // Ejemplo de color, puedes cambiarlo
                 onClick = onNavigateToCatScreen
             )
 
@@ -130,7 +130,7 @@ fun MainScreen(
                 modifier = Modifier.fillMaxWidth() // Para que ocupe el ancho
             ) {
                 Text(
-                    text = "Fechas importantes",
+                    text = "Las fechas importantes",
                     fontFamily = FontFamily.SansSerif
                 )
             }

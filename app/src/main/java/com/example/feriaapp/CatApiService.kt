@@ -16,18 +16,10 @@ interface CatApiService {
 Puedes registrarte en https://thecatapi.com/signup para obtener una.
  *               Si la usas, deberás añadirla como un Query parameter.
  */
-@GET("v1/images/search") // Este es el endpoint específico de la API
+@GET("v1/images/search")
 suspend fun getRandomCatImage(
-    @Query("limit") limit: Int = 1, // Por defecto, pedimos 1 imagen
-    // @Query("api_key") apiKey: String = "TU_API_KEY_AQUI" // Descomenta y añade tu API Key si la tienes
-): List<CatImage> // La API devuelve un array, incluso para una sola imagen con limit=1
+    @Query("limit") limit: Int = 1,
+): List<CatImage>
 
-    // Podrías añadir más funciones aquí para otros endpoints de TheCatAPI si los necesitas
-    // Por ejemplo, para buscar por raza, categoría, etc.
-    // @GET("v1/images/search")
-    // suspend fun searchImages(
-    //     @Query("breed_ids") breedId: String,
-    //     @Query("limit") limit: Int = 10,
-    //     @Query("api_key") apiKey: String = "TU_API_KEY_AQUI"
-    // ): List<CatImage>
+
 }

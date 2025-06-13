@@ -9,11 +9,11 @@ class Nave3Activity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NaveDetailScreen(  // Cambiado de NaveScreen a NaveDetailScreen
-                title = "Nave 3: Tecnología e Innovación",
+                title = "Nave 3: Playa",
                 imageRes = R.drawable.nave_3,  // Cambiado de nave3_detail a nave_3
-                description = "Explora lo último en tecnología e innovación en nuestra Nave 3. " +
-                        "Descubre startups locales, desarrollos tecnológicos y soluciones " +
-                        "innovadoras que están transformando nuestra región.",
+                description = "Explora los hermosos cielos en la playa de nuestra Nave 3. " +
+                        "Descubre las comidad y vebidas mas exoticas en nuestros bares " +
+                        "y restaurantes lujosos.",
                 onBackPressed = { finish() }
             )
         }

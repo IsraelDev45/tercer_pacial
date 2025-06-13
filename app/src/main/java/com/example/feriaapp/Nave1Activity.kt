@@ -9,9 +9,9 @@ class Nave1Activity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NaveDetailScreen(
-                title = "Nave 1: Gastronomía Local",
+                title = "Nave 1: Diverciones",
                 imageRes = R.drawable.nave_1,
-                description = "La Nave 1 está dedicada a la gastronomía local...",
+                description = "La Nave 1 está en focada en los parques de diverciones como los juegos mecanicos y demas",
                 onBackPressed = { finish() }
             )
         }
